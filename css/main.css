@@ -1,0 +1,36 @@
+* {
+    box-sizing: border-box;
+    background-color: aquamarine;
+    margin: 0;
+  }
+  body {
+    display: flex;
+    justify-content: center;
+  }
+  main {
+    display: flex;
+    width: 90%;
+    justify-content: center;
+    flex-direction: column;
+  }
+  h1 {
+    display: flex;
+  }
+  .main-container {
+    display: flex;
+    flex-direction: row;
+    width: 90%;
+    gap: 15vh;
+  }
+  .product-section {
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    border: 3px solid beige;
+  }
+  .cart-section {
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    border: 3px solid beige;
+  }

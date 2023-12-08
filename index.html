@@ -1,35 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="./css/main.css">
-</head>
-<body>
-        <h1>Välkommen till vår Webbshop!</h1>
-            
+    <link rel="stylesheet" href="./css/main.css" />
+  </head>
+  <body>
+    <main>
+      <h1>Välkommen till vår Webbshop!</h1>
+      <div class="main-container">
+        <section class="product-section">
           <h2>Våra produkter</h2>
           <!-- filter knappar för produkt kategorier här -->
           <label for="price">Max. Price</label>
-          <input type="number" id="price">
+          <input type="number" id="price" />
           <label for="category">Category:</label>
-        <select id="category">
-        <option value="">All</option>
-        <option value="elektronik">Elektronik</option>
-        <option value="kläder">Kläder</option>
-        </select>
+          <select id="category">
+            <option value="">All</option>
+            <option value="elektronik">Elektronik</option>
+            <option value="kläder">Kläder</option>
+          </select>
           <button id="price-btn">Search</button>
           <!-- Visa era produkter innuti product-container -->
-        <div id="product-container"></div>
-      
-        <h2>Din Varukorg</h2>
-        <h3 id="total">Total: </h3>
+          <div id="product-container"></div>
+        </section>
+        <section class="cart-section">
+          <h2>Din Varukorg</h2>
           <!-- visa produkter som lagts till i kundvagnen och totalsumman innuti cart -->
-        <div id="cart"></div>
-          
+          <div id="cart"></div>
           <!-- alert, eller sida som säger produkterna är på väg -->
-        <button id="checkout">Gå till kassan</button>
+          <button id="checkout">Gå till kassan</button>
+        </section>
+      </div>
+    </main>
     <script src="./script/main.js"></script>
-</body>
+  </body>
 </html>
