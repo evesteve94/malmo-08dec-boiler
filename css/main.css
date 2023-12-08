@@ -23,7 +23,7 @@
     flex-direction: row;
     justify-content: center;
     width: 100%;
-    gap: 15vh;
+    gap: 5vh;
   }
   .product-section {
     display: flex;
@@ -87,4 +87,9 @@
 
   #price-btn {
     width: 30%;
+  }
+
+  img {
+    width: 80%;
+    border-radius: 100%;
   }

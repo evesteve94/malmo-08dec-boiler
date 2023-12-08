@@ -7,10 +7,10 @@ ut fiktiva produkter därifrån istället för från en lokal js/json.
 */
 
 const things = [
-    { id: 1, name: 'T-shirt', category: 'kläder', price: 100 },
-    { id: 2, name: 'Hörlurar', category: 'elektronik', price: 250 },
-    { id: 3, name: 'Keps', category: 'kläder', price: 50 },
-    { id: 4, name: 'Mobiltelefon', category: 'elektronik', price: 500 }
+    { id: 1, name: 'T-shirt', category: 'kläder', price: 100, image: './images/tshirt.jpg' },
+    { id: 2, name: 'Hörlurar', category: 'elektronik', price: 250, image: './images/lurar.png' },
+    { id: 3, name: 'Keps', category: 'kläder', price: 50, image: './images/keps.jpg' },
+    { id: 4, name: 'Mobiltelefon', category: 'elektronik', price: 500, image: './images/mobbe.jpg' }
 ];
 
 const cart = [];
@@ -21,6 +21,7 @@ let productResults = things.map(thing => {
     return `
     <div class= "product-card">
     <h3> ${thing.name} </h3>
+    <img src= "${thing.image}"> 
     <h4> ${thing.price}kr </h4>
     <button class= "buy-btn" id= "buy-btn${thing.id}"> Buy </button>
     </div>   `
@@ -73,6 +74,7 @@ priceBtn.addEventListener('click', () => {
         return `
         <div class= "product-card">
         <h3> ${thing.name} </h3>
+        <img src= "${thing.image}"> 
         <h4> ${thing.price}kr </h4>
         <button class= "buy-btn" id= "buy-btn${thing.id}"> Buy </button>
         </div>   `
@@ -81,6 +83,40 @@ priceBtn.addEventListener('click', () => {
         productContainer.innerHTML = productFilteredResults.join('');
         //tömma priceInput
         priceInput.value = '';
+        for (let i = 0; i < things.length; i++) {
+            let buyButton = document.getElementById(`buy-btn${things[i].id}`);
+        
+            if (buyButton) {
+                buyButton.addEventListener('click', function() {
+                    // Lägg till den klickade produkten i varukorgen
+                    addToCart(things[i]);
+                    //lägger till varan i vår cart array
+                    cart.push(things[i]);
+                    // Använd reduce() för att beräkna totalpriset
+                    let totalPrice = cart.reduce(function(total, product) {
+                        return total + product.price;
+                    }, 0);
+                    
+                    // Skriv ut totalpriset
+                    totalSum.textContent = `Total: ${totalPrice}kr`;
+                    
+                });
+            }
+        }
+        
+        function addToCart(product) {
+            // Skapa HTML för den klickade produkten
+            let cartResult = `
+                <div class="product-card">
+                    <h3>${product.name}</h3>
+                    <img src= "${product.image}"> 
+                    <h4>${product.price}kr</h4>
+                </div>`;
+        
+            // Lägg till HTML för den klickade produkten i varukorgen
+            cartDiv.innerHTML += cartResult;
+        
+        };
 })
 //hämta cart
 const cartDiv = document.getElementById('cart');
@@ -116,6 +152,7 @@ function addToCart(product) {
     let cartResult = `
         <div class="product-card">
             <h3>${product.name}</h3>
+            <img src= "${product.image}"> 
             <h4>${product.price}kr</h4>
         </div>`;
 
