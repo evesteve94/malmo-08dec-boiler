@@ -21,7 +21,7 @@ let productResults = things.map(thing => {
     return `
     <div class= "product-card">
     <h3> ${thing.name} </h3>
-    <h4> ${thing.price} </h4>
+    <h4> ${thing.price}kr </h4>
     <button class= "buy-btn" id= "buy-btn${thing.id}"> Buy </button>
     </div>   `
 })
@@ -44,8 +44,6 @@ const priceBtn = document.getElementById('price-btn');
 priceBtn.addEventListener('click', () => {
     priceQuery = parseInt(priceInput.value); //blir en int
     categoryQuery = categoryInput.value.toLowerCase();
-    console.log(categoryQuery);
-    //console.log(priceQuery);
     //filter funktion
     let filteredThings = things.filter(thing => {
         //skapar två variabler som är villkor senare (booleans)
@@ -75,8 +73,8 @@ priceBtn.addEventListener('click', () => {
         return `
         <div class= "product-card">
         <h3> ${thing.name} </h3>
-        <h4> ${thing.price} </h4>
-        
+        <h4> ${thing.price}kr </h4>
+        <button class= "buy-btn" id= "buy-btn${thing.id}"> Buy </button>
         </div>   `
     })
         // uppdaterar vår div med filtrerade resultat
@@ -86,6 +84,9 @@ priceBtn.addEventListener('click', () => {
 })
 //hämta cart
 const cartDiv = document.getElementById('cart');
+
+//hämta total
+const totalSum = document.getElementById('total');
 
 //skapa event för köp-knapp
 //hämta knapp
@@ -98,7 +99,14 @@ for (let i = 0; i < things.length; i++) {
             addToCart(things[i]);
             //lägger till varan i vår cart array
             cart.push(things[i]);
-            console.log(`added to cart: ${cart}`);
+            // Använd reduce() för att beräkna totalpriset
+            let totalPrice = cart.reduce(function(total, product) {
+                return total + product.price;
+            }, 0);
+            
+            // Skriv ut totalpriset
+            totalSum.textContent = `Total: ${totalPrice}kr`;
+            
         });
     }
 }
@@ -108,15 +116,21 @@ function addToCart(product) {
     let cartResult = `
         <div class="product-card">
             <h3>${product.name}</h3>
-            <h4>${product.price}</h4>
-            <button class= "buy-btn" id= "buy-btn${thing.id}"> Buy </button>
+            <h4>${product.price}kr</h4>
         </div>`;
 
     // Lägg till HTML för den klickade produkten i varukorgen
     cartDiv.innerHTML += cartResult;
 
 };
+//skapa argressivt meddelande
 
-//reduce() på summan av alla produkter i varukorgen - när checkout trycks
-//cart.reduce(); --> total summan
 
+//hämta checkout
+const checkoutBtn = document.getElementById('checkout');
+//hämta main
+const main = document.querySelector('main');
+checkoutBtn.addEventListener('click', function(){
+    main.innerHTML = `
+    <h1 class= "angry-msg"> VI HADE INTE TID! </h1>`
+})
