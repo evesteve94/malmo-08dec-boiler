@@ -31,14 +31,31 @@ let productContainer = document.getElementById('product-container');
 productContainer.innerHTML = productResults.join('');
 
 /*länka till våra filter knappar/inputs */
-//input
+//input pris
 const priceInput = document.getElementById('price');
-let priceQuery;
+let priceQuery; //undefined
+//input kategori
+const categoryInput = document.getElementById('category');
+let categoryQuery; // undefined
 
 //knapp
 const priceBtn = document.getElementById('price-btn');
 priceBtn.addEventListener('click', () => {
-    priceQuery = parseInt(priceInput.value);
+    priceQuery = parseInt(priceInput.value); //blir en int
+    categoryQuery = categoryInput.value.toLowerCase();
     //console.log(priceQuery);
+    //filter funktion
+    let filteredThings = things.filter(thing => {
+        return thing.price <= priceQuery;
+    });
+    let productFilteredResults = filteredThings.map(thing => {
+        return `
+        <div class= "product-card">
+        <h3> ${thing.name} </h3>
+        <h4> ${thing.price} </h4>
+        </div>   `
+    })
+        // uppdaterar vår div med filtrerade resultat
+        productContainer.innerHTML = productFilteredResults.join('');
 })
 
