@@ -29,3 +29,16 @@ let productContainer = document.getElementById('product-container');
 
 //lägga till i vår div
 productContainer.innerHTML = productResults.join('');
+
+/*länka till våra filter knappar/inputs */
+//input
+const priceInput = document.getElementById('price');
+let priceQuery;
+
+//knapp
+const priceBtn = document.getElementById('price-btn');
+priceBtn.addEventListener('click', () => {
+    priceQuery = parseInt(priceInput.value);
+    //console.log(priceQuery);
+})
+
