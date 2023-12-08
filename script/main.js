@@ -22,6 +22,7 @@ let productResults = things.map(thing => {
     <div class= "product-card">
     <h3> ${thing.name} </h3>
     <h4> ${thing.price} </h4>
+    <button class= "buy-btn" id= "buy-btn"> Buy </button>
     </div>   `
 })
 //koppla till product-container
@@ -43,11 +44,33 @@ const priceBtn = document.getElementById('price-btn');
 priceBtn.addEventListener('click', () => {
     priceQuery = parseInt(priceInput.value); //blir en int
     categoryQuery = categoryInput.value.toLowerCase();
+    console.log(categoryQuery);
     //console.log(priceQuery);
     //filter funktion
     let filteredThings = things.filter(thing => {
-        return thing.price <= priceQuery;
+        //skapar två variabler som är villkor senare (booleans)
+        let meetsPriceCriteria;
+        let meetsCategoryCriteria;
+
+        //jämför priceQuery (om det finns - användaren har angett ett värde)
+        if (priceQuery) {
+            //tilldelas värde   - om villkoret stämmer
+            meetsPriceCriteria = thing.price <= priceQuery;
+        } else {
+            meetsPriceCriteria = true;
+        }
+        //samma sak, fast kategory
+        if (categoryQuery) {
+            //tilldelar värde ----- om villkoret stämmer (lowercase)
+            meetsCategoryCriteria = thing.category.toLowerCase() === categoryQuery;
+        } else {
+            meetsCategoryCriteria = true;
+        }
+        
+        //returnerar värdet av pris & kategori
+        return meetsPriceCriteria && meetsCategoryCriteria;
     });
+    //skapar HTML element enligt filter
     let productFilteredResults = filteredThings.map(thing => {
         return `
         <div class= "product-card">
@@ -57,5 +80,11 @@ priceBtn.addEventListener('click', () => {
     })
         // uppdaterar vår div med filtrerade resultat
         productContainer.innerHTML = productFilteredResults.join('');
+        //tömma priceInput
+        priceInput.value = '';
 })
 
+//skapa event för köp-knapp
+//hämta knapp
+const buyBtn = document.getElementById('buy-btn');
+//eventListener
