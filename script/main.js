@@ -76,6 +76,7 @@ priceBtn.addEventListener('click', () => {
         <div class= "product-card">
         <h3> ${thing.name} </h3>
         <h4> ${thing.price} </h4>
+        
         </div>   `
     })
         // uppdaterar vår div med filtrerade resultat
@@ -108,6 +109,7 @@ function addToCart(product) {
         <div class="product-card">
             <h3>${product.name}</h3>
             <h4>${product.price}</h4>
+            <button class= "buy-btn" id= "buy-btn${thing.id}"> Buy </button>
         </div>`;
 
     // Lägg till HTML för den klickade produkten i varukorgen
